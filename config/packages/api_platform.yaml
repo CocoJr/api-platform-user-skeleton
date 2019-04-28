@@ -1,0 +1,13 @@
+framework:
+    serializer: { enable_annotations: true }
+
+api_platform:
+    mapping:
+        paths: ['%kernel.project_dir%/src/Entity']
+    graphql:
+        enabled: false
+    swagger:
+        api_keys:
+            apiKey:
+                name: Authorization
+                type: header
