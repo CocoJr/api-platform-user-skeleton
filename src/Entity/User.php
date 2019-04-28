@@ -98,21 +98,6 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Project", mappedBy="user", orphanRemoval=true)
-     *
-     * @Groups({"read"})
-     */
-    private $projects;
-
-    /**
-     * User constructor.
-     */
-    public function __construct()
-    {
-        $this->projects = new ArrayCollection();
-    }
-
-    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -223,36 +208,5 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    /**
-     * @return Collection|Project[]
-     */
-    public function getProjects(): Collection
-    {
-        return $this->projects;
-    }
-
-    public function addProject(Project $project): self
-    {
-        if (!$this->projects->contains($project)) {
-            $this->projects[] = $project;
-            $project->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProject(Project $project): self
-    {
-        if ($this->projects->contains($project)) {
-            $this->projects->removeElement($project);
-            // set the owning side to null (unless already changed)
-            if ($project->getUser() === $this) {
-                $project->setUser(null);
-            }
-        }
-
-        return $this;
     }
 }
